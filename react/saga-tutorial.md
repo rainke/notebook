@@ -1,6 +1,6 @@
 > 在开始学习本教程之前，我们假定你已经能够熟练使用redux和react
-## 一个简单的例子
-在store中引入中间件`redux-saga`
+## 一个简单的例子
+在store中引入中间件`redux-saga`
 ```javascript
 //store
 import { createStore, applyMiddleware } from 'redux';
@@ -19,7 +19,7 @@ function* helloSagas(){
 
 export default helloSagas
 ```
-运行程序，就可以在控制台看到`hello saga`。现在让我们的saga开始捕获`action`，下面是一个简单的`Counter`组件,对于这种同步的action，我们无需借助saga，但是当我们点击按钮式，saga仍然能够监听到action的执行。运行下面的程序，当点击按钮式，在控制台会打印相应的action，但action并不是由saga来调用的。
+运行程序，就可以在控制台看到`hello saga`。现在让我们的saga开始捕获`action`，下面是一个简单的`Counter`组件,对于这种同步的action，我们无需借助saga，但是当我们点击按钮式，saga仍然能够监听到action的执行。运行下面的程序，当点击按钮式，在控制台会打印相应的action，但action并不是由saga来调用的。
 ```js
 // component
 import React, { Component } from 'react'
@@ -90,7 +90,7 @@ function* incrementSagas(){
 
 export default incrementSagas;
 ```
-现在我们对做一点小改动，定义一个新的`action`:`MY_INCREMENT`，这个`action`的作用就是执行原来的`INCREMENT`，我们新添加一个按钮，点击时`dispatch`这个`action`
+现在我们对做一点小改动，定义一个新的`action`:`MY_INCREMENT`，这个`action`的作用就是执行原来的`INCREMENT`，我们新添加一个按钮，点击时`dispatch`这个`action`
 
 ```js
 const { increment, decrement, myIncrement } = this.props
@@ -115,7 +115,7 @@ function* incrementSagas(){
 
 export default incrementSagas;
 ```
-当saga拿到`MY_INCREMENT`时，执行`increment`函数，而`increment`函数就是`dispatch INCREMENT`，从而实现的counter的增加。此时我们就发现，如果要MY_INCREMENT延迟执行的话，只需要在`increment`函数中yeild一个延迟函数,就像这样：
+当saga拿到`MY_INCREMENT`时，执行`increment`函数，而`increment`函数就是`dispatch INCREMENT`，从而实现的counter的增加。此时我们就发现，如果要MY_INCREMENT延迟执行的话，只需要在`increment`函数中yeild一个延迟函数,就像这样：
 ```js
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -135,4 +135,4 @@ export default function* rootSaga() {
 }
 
 ```
-到这里，我们大致已经了解了saga的基本原理，后面的教程将详细介绍具体的细节。
+到这里，我们大致已经了解了saga的基本原理，后面的教程将详细介绍具体的细节。
