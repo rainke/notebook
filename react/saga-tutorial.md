@@ -1,4 +1,6 @@
-> 在开始学习本教程之前，我们假定你已经能够熟练使用redux和react
+> 在开始学习本教程之前，我们假定你已经能够熟练使用Generator、redux和react。
+
+redux-saga 是一个在 React/Redux 应用中，可以优雅地处理 side effect(副作用：异步等)的库，你可以在一个地方创建sagas来专门处理side effect。
 ## 一个简单的例子
 在store中引入中间件`redux-saga`
 ```javascript
@@ -19,7 +21,7 @@ function* helloSagas(){
 
 export default helloSagas
 ```
-运行程序，就可以在控制台看到`hello saga`。现在让我们的saga开始捕获`action`，下面是一个简单的`Counter`组件,对于这种同步的action，我们无需借助saga，但是当我们点击按钮式，saga仍然能够监听到action的执行。运行下面的程序，当点击按钮式，在控制台会打印相应的action，但action并不是由saga来调用的。
+运行程序，就可以在控制台看到`hello saga`。现在让我们的saga开始捕获`action`，下面是一个简单的`Counter`组件,对于这种同步的action，我们无需借助saga，但是当我们点击按钮式，saga仍然能够监听到action的执行。运行下面的程序，当点击按钮时，在控制台会打印相应的action，但action并不是由saga来调用的。
 ```js
 // component
 import React, { Component } from 'react'
@@ -115,7 +117,7 @@ function* incrementSagas(){
 
 export default incrementSagas;
 ```
-当saga拿到`MY_INCREMENT`时，执行`increment`函数，而`increment`函数就是`dispatch INCREMENT`，从而实现的counter的增加。此时我们就发现，如果要MY_INCREMENT延迟执行的话，只需要在`increment`函数中yeild一个延迟函数,就像这样：
+当saga拿到`MY_INCREMENT`时，执行`increment`函数，而`increment`函数就是`dispatch INCREMENT`，从而实现的counter的增加。此时我们就发现，如果要MY_INCREMENT延迟执行的话，只需要在`increment`函数中yeild一个延迟函数,当一个Promise在saga中yield时，saga将暂停执行，知道这个Promise被resolve，然后saga继续执行。
 ```js
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
